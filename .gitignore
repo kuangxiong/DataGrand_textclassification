@@ -1,0 +1,9 @@
+# 文件夹目录
+init_data/
+.ipynb_checkpoints/
+
+
+# 文件类型
+*.csv
+
+
