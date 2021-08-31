@@ -1,11 +1,13 @@
-# -*-coding: utf-8 -*-
-"""
-    @Project: nlp-learning-tutorials
-    @File   : word2vec_gensim.py
-    @Author : panjq
-    @E-mail : pan_jinquan@163.com
-    @Date   : 2017-05-11 17:04:35
-"""
+# -*- encoding: utf-8 -*-
+'''
+--------------------------------------------------------------------
+@File    :   w2v_gensim.py
+@Time    :   2021/08/31 07:48:55
+@Author  :   kuangxiong 
+@Version :   1.0
+@Email :   kuangxiong1993@163.com
+--------------------------------------------------------------------
+'''
 
 from gensim.models import word2vec
 from gensim import utils
