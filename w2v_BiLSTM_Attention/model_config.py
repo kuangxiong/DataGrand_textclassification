@@ -12,6 +12,7 @@ class ModelConfig(GlobalData):
         GlobalData: 全局文件路径
     """
     # def __init__(self, hidden_size, max_length, embedding_size):
+    w2v_path = "w2v_BiLSTM_Attention/w2v_pretrain"
     hidden_size = 64
     max_length = 100
     embeddings_size = 512

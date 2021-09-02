@@ -11,9 +11,34 @@
 
 import os     
 import sys 
+import pandas as pd 
+from w2v_BiLSTM_Attention.model_config import ModelConfig
+import pickle
+import loguru as logger
+from gensim import corpora, models
 
-from w2v_BiLSTM_Attention.model_config import GlobalData
 
+@logger.catch 
+def labelmap(GlobalData):
+    """
+    数据label和id 之间的映射
+
+    Args:
+        GlobalData ([class]): [全局文件路径和参数配置]
+    """
+    train_label = pd.read_csv(GlobalData.train_file)
+    # 获取所有的label集合
+    all_label = train_label['label'].unique()
+    label2id, id2label = {}, {}
+    for i in range(len(all_label)):
+        label2id[all_label[i]] = i+1
+        id2label[i+1] = all_label[i]
+    label_map = [label2id, id2label]
+    tmpfile = open(os.path.join(GlobalData.w2v_path, 'labelmap.pkl'), 'wb')
+    pickle.dump(label_map, tmpfile)
+    tmpfile.close()
+
+@logger.catch 
 def wordmap(GlobalData):
     """
     构造词和id之间的映射
@@ -21,6 +46,18 @@ def wordmap(GlobalData):
     Args:
         GlobalData ([class]): [文件的全局路径配置文件]
     """
-    print(1111, GlobalData.train_file)
+    train_data = pd.read_csv(GlobalData.train_file)
+    test_data = pd.read_csv(GlobalData.test_file)
 
-wordmap(GlobalData)
+    all_text = pd.concat([train_data['text'], test_data['text']])
+    print(all_text.head(1))
+    all_word = []
+    # word2map  = {"UNK":0}
+    # for e in all_text:
+    
+    # print(len(all_text))
+    # print(data.head(1))
+    # print(1111, GlobalData.train_file)
+
+wordmap(ModelConfig)
+# labelmap(ModelConfig)
