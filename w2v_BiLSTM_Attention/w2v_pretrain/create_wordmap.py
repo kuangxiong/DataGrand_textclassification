@@ -11,7 +11,8 @@
 
 import os     
 import sys 
-from ...config import GlobalData
+
+from w2v_BiLSTM_Attention.model_config import GlobalData
 
 def wordmap(GlobalData):
     """
