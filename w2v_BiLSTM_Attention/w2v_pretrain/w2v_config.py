@@ -12,10 +12,9 @@
 import os 
 import sys     
 
-from ...config import GlobalData 
-BASE_PATH = os.path.dirname(__file__)
+from w2v_BiLSTM_Attention.model_config import ModelConfig
 
-class w2v_Config(GlobalData):
+class w2v_Config(ModelConfig()):
     """
     word2vec 模型的参数设置
 

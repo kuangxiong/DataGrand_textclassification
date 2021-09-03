@@ -12,13 +12,15 @@
 from gensim.models import word2vec
 from gensim import utils
 import multiprocessing
+from w2v_BiLSTM_Attention.model_config import ModelConfig
 
 
 def train_wordVectors(sentences, embedding_size=128, window=5, min_count=5):
     """
 
     :param sentences: sentences可以是LineSentence或者PathLineSentences读取的文件对象，也可以是
-                    The `sentences` iterable can be simply a list of lists of tokens,如lists=[['我','是','中国','人'],['我','的','家乡','在','广东']]
+                    The `sentences` iterable can be simply a list of lists of tokens,
+                    如lists=[['我','是','中国','人'],['我','的','家乡','在','广东']]
     :param embedding_size: 词嵌入大小
     :param window: 窗口
     :param min_count:Ignores all words with total frequency lower than this.
@@ -43,13 +45,15 @@ def load_wordVectors(word2vec_path):
     return w2vModel
 
 
-def train_THUCNews(segment_dir, out_word2vec_path):
+def train_grand_data(segment_dir, out_word2vec_path):
+    
     sentences = word2vec.PathLineSentences(segment_dir)
     model = train_wordVectors(sentences, embedding_size=128, window=5, min_count=5)
     save_wordVectors(model, out_word2vec_path)
 
 
 def train_test():
+
     # [1]若只有一个文件，使用LineSentence读取文件
     segment_path='./data/segment/segment_0.txt'
     utils.to_unicode(segment_path, encoding="utf-8", errors="ignore")

@@ -12,10 +12,11 @@
 import os     
 import sys 
 import pandas as pd 
-from w2v_BiLSTM_Attention.model_config import ModelConfig
 import pickle
 from loguru import  logger
 from gensim import corpora, models
+from w2v_BiLSTM_Attention.model_config import ModelConfig
+
 
 @logger.catch 
 def labelmap(GlobalData):
@@ -49,12 +50,11 @@ def wordmap(GlobalData):
     test_data = pd.read_csv(GlobalData.test_file)
 
     all_text = pd.concat([train_data['text'], test_data['text']])
-    print(all_text[0])
     all_word_list = []
     for i in range(len(all_text)):
         all_word_list.append(str(all_text.iloc[i]).split())
     word2map = corpora.Dictionary(all_word_list)
     word2map.save(os.path.join(GlobalData.w2v_path, 'wordmap.pkl'))
 
-wordmap(ModelConfig)
+# wordmap(ModelConfig)
 # labelmap(ModelConfig)
