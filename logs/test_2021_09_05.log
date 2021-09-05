@@ -1,2 +1,3 @@
 2021-09-05 22:21:19 | INFO | load_data.py | hello, world
 2021-09-05 22:24:50 | INFO | load_data.py | hello, world
+2021-09-05 23:35:24 | INFO | create_embedding_matrix.py | 词映射和词向量矩阵生成

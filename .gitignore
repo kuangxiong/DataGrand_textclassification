@@ -2,10 +2,11 @@
 init_data/
 .ipynb_checkpoints/
 results/
+logs/
 
 
 # 文件类型
 *.csv
 *.pkl
 *.npy
-
+*.log

@@ -14,6 +14,8 @@ import os
 import sys
 from gensim.models import word2vec 
 import pickle 
+from config import GlobalData
+logger = GlobalData.cust_logger
 
 CUR_PATH = os.path.dirname(__file__)
 print(CUR_PATH)
@@ -45,4 +47,5 @@ if __name__=='__main__':
     file = open(os.path.join(CUR_PATH, "word2map.pkl"), "wb")
     pickle.dump(word2id, file)
     np.save(os.path.join(CUR_PATH, "w2v_matrix.npy"), matrix)
+    logger.info("词映射和词向量矩阵生成")
 
