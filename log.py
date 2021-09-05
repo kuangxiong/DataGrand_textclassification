@@ -26,13 +26,18 @@ import copy
 from loguru import logger
 
 
-class Rotator:
-
+class CustRotator:
+    """
+    自定义 Rotator 类
+    """
     def __init__(self, *, size, at):
         now = datetime.datetime.now()
         self._size_limit = size
         self._time_limit = now.replace(
-            hour=at.hour, minute=at.minute, second=at.second)
+            hour=at.hour, 
+            minute=at.minute, 
+            second=at.second
+        )
 
         if now >= self._time_limit:
             # The current time is already past the target time so it would rotate already.
@@ -49,7 +54,7 @@ class Rotator:
         return False
 
 
-class MyFilter:
+class CustFilter:
     """
     级别名称	    严重度值	记录器法
     TRACE	    5	    logger.trace()
@@ -76,7 +81,7 @@ class MyFilter:
             return record["level"].no >= levelno
 
 
-def find_caller(is_filename=True, is_lineno=False, is_func_name=False):
+def cust_caller(is_filename=True, is_lineno=False, is_func_name=False):
     """
     查看函数调用的情况
     :param func:
@@ -122,9 +127,9 @@ class Logger:
         # 示例化
         self.logger = copy.deepcopy(logger)
         # 按照 大小、 日期来分割日志
-        rotator = Rotator(size=5e+8, at=datetime.time(0, 0, 0))
+        rotator = CustRotator(size=5e+8, at=datetime.time(0, 0, 0))
         # info 单独存文件; warning 以上合并存文件
-        level_filter = MyFilter(level)
+        level_filter = CustFilter(level)
         # format
         if not format:
             # 时间日期格式：https://loguru.readthedocs.io/en/stable/api/logger.html#time
@@ -154,15 +159,15 @@ class Logger:
         """ 单例模式 """
         return super().__new__(cls)
 
-    @find_caller(is_filename=True, is_lineno=False, is_func_name=False)
+    @cust_caller(is_filename=True, is_lineno=False, is_func_name=False)
     def info(self, msg):
         return self.logger.info(msg)
 
-    @find_caller(is_filename=True, is_lineno=True, is_func_name=True)
+    @cust_caller(is_filename=True, is_lineno=True, is_func_name=True)
     def warn(self, msg):
         return self.logger.warning(msg)
 
-    @find_caller(is_filename=True, is_lineno=True, is_func_name=True)
+    @cust_caller(is_filename=True, is_lineno=True, is_func_name=True)
     def error(self, msg):
         return self.logger.error(msg)
 
@@ -173,14 +178,14 @@ class Logger:
 if __name__ == '__main__':
     #
     t = time.strftime('%Y_%m_%d')
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     #
-    log_info = Logger(f"{BASE_DIR}/logs/test_{t}.log", level='INFO')
-    log_error = Logger(f"{BASE_DIR}/logs/poi_error_{t}.log", level='WARNING')
+    log_info = Logger(f"logs/test_{t}.log", level='INFO')
+    # log_error = Logger(f"logs/poi_error_{t}.log", level='WARNING')
     # log_1 = Logger()
     log_info.info('test !!!')
     log_info.info('hello !!!')
     log_info.warn('warn !!!')
-    log_error.warn('warn !!!')
+    # log_error.warn('warn !!!')
     print('main over')
 

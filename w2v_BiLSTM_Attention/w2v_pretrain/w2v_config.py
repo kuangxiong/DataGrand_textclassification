@@ -14,7 +14,7 @@ import sys
 
 from w2v_BiLSTM_Attention.model_config import ModelConfig
 
-class w2v_Config(ModelConfig()):
+class w2v_Config(ModelConfig):
     """
     word2vec 模型的参数设置
 

@@ -8,7 +8,8 @@
 @Email :   kuangxiong1993@163.com
 --------------------------------------------------------------------
 '''
-
+import pandas as pd 
+import os
 from gensim.models import word2vec
 from gensim import utils
 import multiprocessing
@@ -45,15 +46,25 @@ def load_wordVectors(word2vec_path):
     return w2vModel
 
 
-def train_grand_data(segment_dir, out_word2vec_path):
-    
-    sentences = word2vec.PathLineSentences(segment_dir)
-    model = train_wordVectors(sentences, embedding_size=128, window=5, min_count=5)
-    save_wordVectors(model, out_word2vec_path)
+def train_grand_data(ModelConfig):
+    """
+    采用word2vec模型训练词向量
 
+    Args:
+        ModelConfig ([class]): [description]
+    """
+    train_data = pd.read_csv(ModelConfig.train_file)
+    test_data = pd.read_csv(ModelConfig.test_file)
+    all_data = pd.concat([train_data['text'], test_data['text']])
+    sentences = []
+    for i in range(len(all_data)):
+        sentences.append(all_data.iloc[i].split())
+    print(sentences[0])
+    # sentences = word2vec.PathLineSentences(segment_dir)
+    model = train_wordVectors(sentences, embedding_size=128, window=5, min_count=5)
+    save_wordVectors(model, os.path.join(ModelConfig.w2v_path, "word2vec.model"))
 
 def train_test():
-
     # [1]若只有一个文件，使用LineSentence读取文件
     segment_path='./data/segment/segment_0.txt'
     utils.to_unicode(segment_path, encoding="utf-8", errors="ignore")
@@ -80,7 +91,7 @@ def train_test():
 
 
 if __name__ == "__main__":
-    train_test()
+    train_grand_data(ModelConfig)
     # segment_dir='data/THUCNews_segment'
     # out_word2vec_path='models/THUCNews_word2Vec/THUCNews_word2Vec_128.model'
     # # train_THUCNews(segment_dir, out_word2vec_path)

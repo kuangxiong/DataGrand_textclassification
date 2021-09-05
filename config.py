@@ -21,3 +21,4 @@ class GlobalData(object):
 
     train_file = os.path.join(BASE_PATH, "data_source/datagrand_2021_train.csv")
     test_file = os.path.join(BASE_PATH, "data_source/datagrand_2021_test.csv")
+    logs_path = os.path.join(BASE_PATH, "logs")
