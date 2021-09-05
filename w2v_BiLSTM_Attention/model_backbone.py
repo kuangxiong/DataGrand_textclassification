@@ -1,11 +1,11 @@
 from model_config import ModelConfig
 import os 
 import tensorflow as tf
-from tensorlow import keras 
+from tensorflow import keras 
 from attention import Attention
 
 
-def BiLSTM_Attention(ModelConfig):
+def bilstm_attention(ModelConfig):
     """
     定义BiLSTM模型的网络结构
 
@@ -24,7 +24,7 @@ def BiLSTM_Attention(ModelConfig):
 
 
 
-def W2v_BiLSTM_Attention(ModelConfig):
+def w2v_bilstm_attention(ModelConfig):
     """
     定义w2v-BiLSTM模型的网络结构
 

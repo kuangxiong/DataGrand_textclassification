@@ -56,7 +56,7 @@ class CustRotator:
 
 class CustFilter:
     """
-    级别名称	    严重度值	记录器法
+    级别名称	严重度值	记录器法
     TRACE	    5	    logger.trace()
     DEBUG	    10	    logger.debug()
     INFO	    20	    logger.info()
@@ -114,7 +114,9 @@ def cust_caller(is_filename=True, is_lineno=False, is_func_name=False):
 
 
 class Logger:
-
+    """
+    日志文件配置
+    """
     def __init__(
             self,
             file_path=None,

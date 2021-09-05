@@ -6,5 +6,6 @@ results/
 
 # 文件类型
 *.csv
-
+*.pkl
+*.npy
 

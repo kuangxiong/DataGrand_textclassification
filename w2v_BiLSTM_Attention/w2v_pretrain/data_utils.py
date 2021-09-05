@@ -16,6 +16,7 @@ from w2v_config import w2v_Config, BASE_PATH
 import pickle 
 import os 
 
+
 def data_load(w2v_config):
     """
     用于读取训练数据和测试数据

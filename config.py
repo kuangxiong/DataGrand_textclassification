@@ -10,15 +10,16 @@
 """
 import os
 import sys
+import time
+from log_conf import Logger
 
 BASE_PATH = os.path.dirname(os.path.realpath(__file__))
+CURT_T = time.strftime('%Y_%m_%d')
 
-
-class GlobalData(object):
+class GlobalData:
     """
     全局变量设置
     """
-
     train_file = os.path.join(BASE_PATH, "data_source/datagrand_2021_train.csv")
     test_file = os.path.join(BASE_PATH, "data_source/datagrand_2021_test.csv")
-    logs_path = os.path.join(BASE_PATH, "logs")
+    cust_logger = Logger(f"logs/test_{CURT_T}.log", level='INFO')
