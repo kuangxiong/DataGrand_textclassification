@@ -176,7 +176,6 @@ class Logger:
     def debug(self, msg):
         return self.logger.debug(msg)
 
-
 if __name__ == '__main__':
     #
     t = time.strftime('%Y_%m_%d')

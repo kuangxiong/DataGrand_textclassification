@@ -34,7 +34,7 @@ def create_embedding_matrix(word2vec_path):
     model = load_wordVecter(word2vec_path)
     word2id = {"PAD": 0}
     vocab_list = [(k, model.wv[k]) for k, v in model.wv.vocab.items()]
-    embedding_matrix = np.zeros((len(model.wv.vocab.items()) +1, model.vector_size))
+    embedding_matrix = np.zeros((len(model.wv.vocab.items()) + 1, model.vector_size))
     for i in range(len(vocab_list)):
         word = vocab_list[i][0]
         word2id[word] = i + 1
@@ -44,8 +44,8 @@ def create_embedding_matrix(word2vec_path):
 
 if __name__=='__main__':
     word2id, matrix = create_embedding_matrix(os.path.join(CUR_PATH, "word2vec.model"))
-    file = open(os.path.join(CUR_PATH, "word2map.pkl"), "wb")
-    pickle.dump(word2id, file)
+    file_path = open(os.path.join(CUR_PATH, "word2map.pkl"), "wb")
+    pickle.dump(word2id, file_path)
     np.save(os.path.join(CUR_PATH, "w2v_matrix.npy"), matrix)
     logger.info("词映射和词向量矩阵生成")
 

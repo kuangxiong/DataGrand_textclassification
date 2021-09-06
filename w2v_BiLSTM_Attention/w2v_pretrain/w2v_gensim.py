@@ -13,7 +13,7 @@ import os
 from gensim.models import word2vec
 from gensim import utils
 import multiprocessing
-from w2v_BiLSTM_Attention.model_config import ModelConfig
+from w2v_bilstm_attention.model_config import ModelConfig
 
 
 def train_wordVectors(sentences, embedding_size=128, window=5, min_count=5):
@@ -61,7 +61,7 @@ def train_grand_data(ModelConfig):
         sentences.append(all_data.iloc[i].split())
     print(sentences[0])
     # sentences = word2vec.PathLineSentences(segment_dir)
-    model = train_wordVectors(sentences, embedding_size=128, window=5, min_count=5)
+    model = train_wordVectors(sentences, embedding_size=128, window=5, min_count=1)
     save_wordVectors(model, os.path.join(ModelConfig.w2v_path, "word2vec.model"))
 
 def train_test():

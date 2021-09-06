@@ -17,12 +17,14 @@ from tensorflow import keras
 
 from w2v_bilstm_attention.model_config import ModelConfig
 from w2v_bilstm_attention.model_backbone import bilstm_attention
+from w2v_bilstm_attention.data_utils import load_model_dataset
 from config import GlobalData 
+
 logger = GlobalData.cust_logger 
 
 if __name__=="__main__":
     start_time = time.time()
-    train_data, test_data = load_model_dataset(GlobalData)
+    train_data, test_data = load_model_dataset(ModelConfig)
     logger.debug("load train & test data")
     model = bilstm_attention(ModelConfig)
     adam = tf.keras.optimizers.Adam(ModelConfig.learning_rate)
